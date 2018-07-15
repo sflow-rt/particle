@@ -200,7 +200,7 @@ function updateFlows() {
 }
 
 function updateDemo() {
-  var i, s, e, sv, ev, type, value, sides=['N','S','E','W'], types = ['1','6','17'];
+  var i, s, e, sv, ev, type, value, sides=['N','S','E','W'], types = ['1','6','17'], values = [1e3,1e4,1e5,1e6,1e7,1e8,1e9,1e10];
 
   // randomly discard 10% of existing flows
   flows  = flows.filter(x => Math.random() > 0.1);
@@ -212,7 +212,7 @@ function updateDemo() {
     sv = Math.random();
     ev = Math.random();
     type = types[Math.floor(Math.random() * types.length)];
-    value = Math.random() * 1e10;
+    value = values[Math.floor(Math.random() * values.length)];
     flows.push({
       startSide:sides[s],
       startVal:sv,
