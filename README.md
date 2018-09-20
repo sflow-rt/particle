@@ -8,6 +8,9 @@ https://blog.sflow.com/2018/07/visualizing-real-time-network-traffic.html
 2. Run command: `sflow-rt/get-app.sh sflow-rt particle`
 3. Restart sFlow-RT
 
+Alternatively, use the Docker image:
+https://hub.docker.com/r/sflow/particle/
+
 ## Demo
 
 Set property -Dparticle.demo=yes
