@@ -1,6 +1,6 @@
 // author: InMon Corp.
 // version: 0.4
-// date: 7/13/2018
+// date: 10/17/2018
 // description: Particle flow animation
 // copyright: Copyright (c) 2018 InMon Corp.
 
@@ -34,12 +34,12 @@ var keys = [
   'group:ipsource:particle_compass',
   'ipsource',
   'null:[dns:ipsource]:',
-  'null:[country:ipsource]:',
+  'null:[country:ipsource:both]:',
   'null:[asn:ipsource:both]:',
   'group:ipdestination:particle_compass',
   'ipdestination',
   'null:[dns:ipdestination]:',
-  'null:[country:ipdestination]:',
+  'null:[country:ipdestination:both]:',
   'null:[asn:ipdestination:both]:',
   typeKey
 ];
@@ -222,11 +222,11 @@ function updateDemo() {
       frequency:frequency(value),
       info: [
         {name:'Source Address',value:'10.0.'+s+'.'+Math.floor(sv*256),id:'ipsource'},
-        {name:'Source Name',value:(Math.floor(sv*256)+'.'+sides[s]+'.com.').toLowerCase()},
+        {name:'Source Name',value:(Math.floor(sv*256)+'.'+s+'.0.10.in-addr.arpa.').toLowerCase()},
         {name:'Source Country',value:sides[s]},
         {name:'Source AS',value:'AS6500'+s},
         {name:'Destination Address',value:'10.0.'+e+'.'+Math.floor(ev*256),id:'ipdestination'},
-        {name:'Destination Name',value:(Math.floor(ev*256)+'.'+sides[e]+'.com.').toLowerCase()},
+        {name:'Destination Name',value:(Math.floor(ev*256)+'.'+e+'.0.10.in-addr.arpa.').toLowerCase()},
         {name:'Destination Country',value:sides[e]},
         {name:'Destination AS',value:'AS6500'+e},
         {name:typeLabel,value:typeName[type] ? type+'('+typeName[type]+')' : type},
