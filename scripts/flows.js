@@ -1,14 +1,15 @@
 // author: InMon Corp.
-// version: 0.4
-// date: 10/17/2018
+// version: 0.5
+// date: 4/10/2019
 // description: Particle flow animation
-// copyright: Copyright (c) 2018 InMon Corp.
+// copyright: Copyright (c) 2018-2019 InMon Corp.
 
 var groups = {}, options = {};
 
 if(getSystemProperty('particle.velocity')) options.velocity = parseFloat(getSystemProperty('particle.velocity'));
 if(getSystemProperty('particle.radius')) options.radius = parseFloat(getSystemProperty('particle.radius'));
 if(getSystemProperty('particle.maxProbability')) options.maxProbability = parseFloat(getSystemProperty('particle.maxProbability'));
+if(getSystemProperty('particle.height')) options.height = getSystemProperty('particle.height');
 
 options.seed=parseInt(getSystemProperty('particle.seed') || '1234');
 
@@ -19,6 +20,8 @@ var t         = getSystemProperty('particle.t')         || '2';
 var n         = getSystemProperty('particle.n')         || 'n';
 var filter    = getSystemProperty('particle.filter')    || null;
 var demo      = getSystemProperty('particle.demo')      || null;
+
+var inset     = parseFloat(getSystemProperty('particle.inset') || '0.0');
 
 var typeKey   = 'ipprotocol';
 var typeLabel = 'IP Protocol';
@@ -81,6 +84,10 @@ function frequency(val) {
   return Math.log10(val);
 }
 
+function insetVal(val) {
+  return inset > 0.0 && inset < 0.5 ? val * (1.0 - (2 * inset)) + inset : val;
+}
+
 var suffixes = ["\uD835\uDF07","\uD835\uDC5A","","K","M","G","T","P","E"];
 
 function valueStr(value,includeMillis,base2) {
@@ -114,7 +121,7 @@ function cidrRange(cidr) {
 
   var parts = cidr.split('/');
   var val = ip2int(parts[0]);
-  var range = Math.pow(2,32 - (parts.length == 1 ? 32 : parseInt(parts[1]))) - 1;
+  var range = Math.pow(2,32 - (parts.length == 1 ? 32 : parseInt(parts[1])));
   res = {start:val,range:range};
   cidrRanges[cidr] = res;
   return res; 
@@ -130,7 +137,7 @@ function val(side,addr) {
     if(val === 0 && ival >= res.start && (ival - res.start) <= res.range) val = ival - res.start + total;
     total += res.range;
   }
-  return val / total;
+  return insetVal((val + 0.5) / total);
 }
 
 var flows = [];
@@ -209,8 +216,8 @@ function updateDemo() {
   while(flows.length < 20) {
     s = Math.floor(Math.random() * sides.length);
     e = Math.floor(Math.random() * sides.length);
-    sv = Math.random();
-    ev = Math.random();
+    sv = insetVal(Math.random());
+    ev = insetVal(Math.random());
     type = types[Math.floor(Math.random() * types.length)];
     value = values[Math.floor(Math.random() * values.length)];
     flows.push({
