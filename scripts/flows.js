@@ -1,8 +1,8 @@
 // author: InMon Corp.
-// version: 0.5
-// date: 4/10/2019
+// version: 1.0
+// date: 9/30/2020
 // description: Particle flow animation
-// copyright: Copyright (c) 2018-2019 InMon Corp.
+// copyright: Copyright (c) 2018-2020 InMon Corp.
 
 var groups = {}, options = {};
 
